@@ -49,17 +49,17 @@ public class PhoneService {
     }
 
     public List<Phone> getPhone() {
-
-        LOGGER.log(Level.INFO, String.format("Try to save student with rollNumber %s", phone.getId()));
+        List<Phone> phones = new List<Phone>() {};
+        LOGGER.log(Level.INFO, String.format("Try to get list students ");
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            List<Phone> labels = session.createQuery("from Label", Label.class)
+            phones = session.createQuery("from phone", Phone.class)
                     .list();
             session.getTransaction().commit();
-            LOGGER.log(Level.INFO, String.format("Save success..."));
+            LOGGER.log(Level.INFO, String.format("Get success..."));
         } catch (Exception $e) {
-            LOGGER.log(Level.INFO, String.format("Error when save student with rollNumber %s ", phone.getId()));
+            LOGGER.log(Level.INFO, String.format("Error when get list student");
         }
-        return false;
+        return phones;
     }
 }
